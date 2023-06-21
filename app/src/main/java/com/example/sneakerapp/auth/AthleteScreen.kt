@@ -43,6 +43,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sneakerapp.AthletesObject.allAthletes
+import com.example.sneakerapp.Grid.gridItems
 import com.example.sneakerapp.Model.Athlete
 import com.example.sneakerapp.R
 import com.example.sneakerapp.ui.theme.SneakerAppTheme
@@ -139,36 +140,7 @@ fun AthleteScreen(selectedBrand: String?, onNavigateToMain: (String) -> Unit) {
 
 
 
-fun <T> LazyListScope.gridItems(
-    data: List<T>,
-    columnCount: Int,
-    modifier: Modifier,
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
-    itemContent: @Composable BoxScope.(T) -> Unit,
-) {
-    val size = data.count()
-    val rows = if (size == 0) 0 else 1 + (size - 1) / columnCount
-    items(rows, key = { it.hashCode() }) { rowIndex ->
-        Row(
-            horizontalArrangement = horizontalArrangement,
-            modifier = modifier
-        ) {
-            for (columnIndex in 0 until columnCount) {
-                val itemIndex = rowIndex * columnCount + columnIndex
-                if (itemIndex < size) {
-                    Box(
-                        modifier = Modifier.weight(1F, fill = true),
-                        propagateMinConstraints = true
-                    ) {
-                        itemContent(data[itemIndex])
-                    }
-                } else {
-                    Spacer(Modifier.weight(1F, fill = true))
-                }
-            }
-        }
-    }
-}
+
 
 
 
